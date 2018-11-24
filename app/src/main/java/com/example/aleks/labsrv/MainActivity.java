@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView log;
     String strLog;
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +29,17 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         textView = findViewById(R.id.textView5);
         log = findViewById(R.id.log);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
     }
 
     public void calculate(View view) {
+        textView.setText("");
         strLog += "Поток ввода: " + Thread.currentThread().getName() + "\n";
         log.setText(strLog);
         MyThread myThread = new MyThread(Double.valueOf(String.valueOf(editText.getText())));
         myThread.start();
     }
-
 
 
     class MyThread extends Thread {
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Runnable settext = new Runnable() {
             @Override
             public void run() {
+                progressBar.setVisibility(View.GONE);
                 textView.setText(String.valueOf(p));
                 strLog += "Завершение вычислительного потока \n";
                 log.setText(strLog);
@@ -65,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     strLog += "Вычислительный поток : " + threadName + "\n";
                     log.setText(strLog);
+                }
+            });
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             });
             while (t < Math.abs(chr)) {
