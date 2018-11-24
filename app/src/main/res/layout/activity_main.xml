@@ -8,7 +8,12 @@
     android:orientation="vertical"
     >
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="3,1415926535 8979323846" />
 
     <EditText
         android:id="@+id/editText"
@@ -27,6 +32,7 @@
         android:layout_margin="10dp"
         android:onClick="calculate"
         android:text="Рассчитать" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,6 +57,24 @@
             android:textColor="@color/colorAccent"
             android:text="" />
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/log"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:textSize="7pt"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>
